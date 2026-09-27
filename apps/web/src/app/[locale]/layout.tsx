@@ -37,8 +37,8 @@ export default async function LocaleLayout({
   if (!hasLocale(routing.locales, locale)) notFound();
 
   return (
-    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-      <body>
+    <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <NextIntlClientProvider locale={locale} messages={messages[locale]}>
           <AppProviders>{children}</AppProviders>
         </NextIntlClientProvider>

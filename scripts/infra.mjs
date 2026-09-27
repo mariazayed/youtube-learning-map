@@ -2,7 +2,7 @@ import process from 'node:process';
 import { commandVersion, run } from './lib.mjs';
 
 const action = process.argv[2];
-const compose = ['compose', '-f', 'infra/docker-compose.yml'];
+const compose = ['compose', '--env-file', '.env', '-f', 'infra/docker-compose.yml'];
 const actions = {
   config: [...compose, 'config', '--quiet'],
   up: [...compose, 'up', '-d', '--wait'],
@@ -28,7 +28,9 @@ if (!args) {
 }
 
 if (!commandVersion('docker') || !commandVersion('docker', ['compose', 'version'])) {
-  console.error('Docker with the Compose plugin is required and must be running.');
+  console.error(
+    'Docker with the Compose plugin is required and must be running. On WSL, start Docker Desktop and enable integration for the Ubuntu distro.',
+  );
   process.exit(1);
 }
 

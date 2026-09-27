@@ -29,9 +29,13 @@ if (!environment) {
     'NEXT_PUBLIC_OIDC_AUDIENCE',
     'NEXT_PUBLIC_OIDC_REDIRECT_URI',
   ];
-  const browserOidcCount = browserOidcKeys.filter((key) =>
+  const configuredBrowserOidcKeys = browserOidcKeys.filter((key) =>
     Boolean(environment[key]?.trim()),
-  ).length;
+  );
+  const missingBrowserOidcKeys = browserOidcKeys.filter(
+    (key) => !environment[key]?.trim(),
+  );
+  const browserOidcCount = configuredBrowserOidcKeys.length;
   const browserOidcRequired = environment.NODE_ENV === 'production';
   checks.push([
     browserOidcRequired ? 'Browser OIDC (required)' : 'Browser OIDC (optional)',
@@ -42,6 +46,13 @@ if (!environment) {
 
   for (const [name, ok] of checks) console.log(`${mark(Boolean(ok))} ${name}`);
   if (checks.some(([, ok]) => !ok)) {
+    if (browserOidcCount > 0 && browserOidcCount < browserOidcKeys.length) {
+      console.error(
+        `Browser OIDC is partially configured. Set or clear these keys together: ${missingBrowserOidcKeys.join(
+          ', ',
+        )}.`,
+      );
+    }
     console.error(
       '\nConfiguration is incomplete. Values were not printed to protect secrets.',
     );

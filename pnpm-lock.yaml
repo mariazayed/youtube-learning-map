@@ -83,6 +83,9 @@ importers:
       rxjs:
         specifier: ^7.8.2
         version: 7.8.2
+      zod:
+        specifier: ^4.1.5
+        version: 4.5.4
     devDependencies:
       '@learnmap/eslint-config':
         specifier: workspace:*

@@ -12,17 +12,40 @@ const includeServices = process.argv.includes('--services');
 const checks = [];
 const add = (name, ok, detail) => checks.push({ name, ok, detail });
 
+function invokedPnpmVersion() {
+  const match = /(?:^|\s)pnpm\/(?<version>\S+)/u.exec(
+    process.env.npm_config_user_agent ?? '',
+  );
+  return match?.groups?.version;
+}
+
 const nodeMajor = Number(process.versions.node.split('.')[0]);
 add('Node.js 24', nodeMajor === 24, process.versions.node);
 
-const pnpmVersion = commandVersion('pnpm');
-add('pnpm 11.19.0', pnpmVersion === '11.19.0', pnpmVersion ?? 'not found');
+const pnpmVersion = invokedPnpmVersion() ?? commandVersion('pnpm');
+add(
+  'pnpm 11.19.0',
+  pnpmVersion === '11.19.0',
+  pnpmVersion === '11.19.0'
+    ? pnpmVersion
+    : `${pnpmVersion ?? 'not found'}; run: corepack enable && corepack install --global pnpm@11.19.0`,
+);
 add('Git', Boolean(commandVersion('git')), commandVersion('git') ?? 'not found');
 
 const dockerVersion = commandVersion('docker');
-add('Docker', Boolean(dockerVersion), dockerVersion ?? 'not found');
+add(
+  'Docker',
+  Boolean(dockerVersion),
+  dockerVersion ??
+    'not found; install/start Docker Desktop and enable WSL integration for Ubuntu',
+);
 const composeVersion = commandVersion('docker', ['compose', 'version']);
-add('Docker Compose', Boolean(composeVersion), composeVersion ?? 'not found');
+add(
+  'Docker Compose',
+  Boolean(composeVersion),
+  composeVersion ??
+    'not found; install/start Docker Desktop with the Compose plugin enabled',
+);
 
 const environment = loadEnvironment();
 add('.env file', Boolean(environment), environment ? 'found' : 'missing');

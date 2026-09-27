@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { resolve } from 'node:path';
 import { validateWebEnvironment } from '@learnmap/config';
 import createNextIntlPlugin from 'next-intl/plugin';
 import { withSentryConfig } from '@sentry/nextjs/config';
@@ -23,6 +24,14 @@ const nextConfig: NextConfig = {
     '@learnmap/config',
     '@learnmap/observability',
   ],
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@learnmap/contracts': resolve(__dirname, '../../packages/contracts/src'),
+      '@learnmap/observability': resolve(__dirname, '../../packages/observability/src'),
+    };
+    return config;
+  },
   poweredByHeader: false,
   images: {
     remotePatterns: [
