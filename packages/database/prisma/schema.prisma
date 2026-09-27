@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AnalysisStatus {
+  QUEUED
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+enum OutputLanguage {
+  AR
+  EN
+}
+
+enum DetectedLanguage {
+  AR
+  EN
+  OTHER
+}
+
+enum AuditAction {
+  ANALYSIS_CREATED
+  ANALYSIS_RETRIED
+  ANALYSIS_DELETED
+  ACCOUNT_DELETED
+  RETENTION_PURGE
+  SECRET_ROTATION_DEPLOYED
+}
+
+model User {
+  id          String          @id @default(cuid())
+  email       String?         @unique
+  name        String?
+  analyses    VideoAnalysis[]
+  dailyUsages DailyUsage[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+}
+
+model DailyUsage {
+  userId          String
+  usageDate       DateTime @db.Date
+  analysesCreated Int      @default(0)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@id([userId, usageDate])
+  @@index([usageDate])
+}
+
+model AuditEvent {
+  id               String      @id @default(cuid())
+  actorHash        String?     @db.VarChar(64)
+  action           AuditAction
+  targetType       String      @db.VarChar(50)
+  targetHash       String?     @db.VarChar(64)
+  deduplicationKey String?     @unique @db.VarChar(64)
+  metadata         Json?
+  createdAt        DateTime    @default(now())
+
+  @@index([createdAt])
+  @@index([actorHash, createdAt])
+  @@index([action, createdAt])
+}
+
+model VideoAnalysis {
+  id               String            @id @default(cuid())
+  userId           String
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  youtubeVideoId   String
+  youtubeUrl       String
+  videoTitle       String?
+  channelTitle     String?
+  thumbnailUrl     String?
+  durationSeconds  Int?
+  outputLanguage   OutputLanguage
+  detectedLanguage DetectedLanguage?
+  status           AnalysisStatus    @default(QUEUED)
+  progress         Int               @default(0)
+  summary          Json?
+  mindMap          Json?
+  provider         String?
+  model            String?
+  promptVersion    Int
+  schemaVersion    Int
+  cacheKey         String
+  errorCode        String?
+  errorMessage     String?
+  attemptCount     Int               @default(0)
+  createdAt        DateTime          @default(now())
+  startedAt        DateTime?
+  completedAt      DateTime?
+  updatedAt        DateTime          @updatedAt
+
+  @@unique([userId, cacheKey])
+  @@index([userId, createdAt])
+  @@index([status])
+  @@index([youtubeVideoId, outputLanguage])
+}

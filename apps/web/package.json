@@ -1,0 +1,46 @@
+{
+  "name": "@learnmap/web",
+  "version": "0.16.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "test": "vitest run --config vitest.unit.config.ts --passWithNoTests",
+    "test:e2e": "playwright test",
+    "test:e2e:list": "playwright test --list",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@learnmap/config": "workspace:*",
+    "@learnmap/contracts": "workspace:*",
+    "@learnmap/observability": "workspace:*",
+    "@sentry/nextjs": "^10.73.0",
+    "@tanstack/react-query": "^5.85.5",
+    "@xyflow/react": "^12.8.4",
+    "clsx": "^2.1.1",
+    "elkjs": "^0.10.0",
+    "lucide-react": "^0.542.0",
+    "next": "^15.5.2",
+    "next-intl": "^4.3.6",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@learnmap/eslint-config": "workspace:*",
+    "@learnmap/typescript-config": "workspace:*",
+    "@playwright/test": "1.55.0",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@types/node": "^24.3.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "eslint": "9.34.0",
+    "eslint-config-next": "^15.5.2",
+    "tailwindcss": "^4.1.12",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

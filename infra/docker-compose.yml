@@ -1,0 +1,104 @@
+name: youtube-learning-map
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    init: true
+    environment:
+      POSTGRES_DB: youtube_learning
+      POSTGRES_USER: app_user
+      POSTGRES_PASSWORD: local_password
+      POSTGRES_INITDB_ARGS: '--encoding=UTF8 --locale=C'
+    ports:
+      - '127.0.0.1:5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend
+    shm_size: 128mb
+    stop_grace_period: 30s
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U app_user -d youtube_learning']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
+
+  redis:
+    image: valkey/valkey:8-alpine
+    restart: unless-stopped
+    init: true
+    command: ['valkey-server', '--appendonly', 'yes', '--appendfsync', 'everysec']
+    ports:
+      - '127.0.0.1:6379:6379'
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+    stop_grace_period: 15s
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ['CMD', 'valkey-cli', 'ping']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 3s
+
+  prometheus:
+    image: prom/prometheus:v3.14.0
+    profiles: [observability]
+    restart: unless-stopped
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=15d
+    ports:
+      - '127.0.0.1:9090:9090'
+    volumes:
+      - ./observability/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./observability/alerts.yml:/etc/prometheus/rules/alerts.yml:ro
+      - prometheus_data:/prometheus
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks: [backend]
+    depends_on: [alertmanager, blackbox-exporter]
+    security_opt:
+      - no-new-privileges:true
+
+  alertmanager:
+    image: prom/alertmanager:v0.34.0
+    profiles: [observability]
+    restart: unless-stopped
+    command: [--config.file=/etc/alertmanager/alertmanager.yml]
+    ports:
+      - '127.0.0.1:9093:9093'
+    volumes:
+      - ./observability/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    networks: [backend]
+    security_opt:
+      - no-new-privileges:true
+
+  blackbox-exporter:
+    image: prom/blackbox-exporter:v0.28.0
+    profiles: [observability]
+    restart: unless-stopped
+    networks: [backend]
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  postgres_data:
+    name: youtube-learning-map-postgres-data
+  redis_data:
+    name: youtube-learning-map-valkey-data
+  prometheus_data:
+    name: youtube-learning-map-prometheus-data

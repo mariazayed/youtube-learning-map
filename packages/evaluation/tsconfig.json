@@ -1,0 +1,10 @@
+{
+  "extends": "@learnmap/typescript-config/library.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "resolveJsonModule": true
+  },
+  "include": ["src/**/*.ts"]
+}

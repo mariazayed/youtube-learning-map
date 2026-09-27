@@ -1,0 +1,22 @@
+{
+  "name": "@learnmap/typescript-config",
+  "version": "0.3.0",
+  "private": true,
+  "files": [
+    "base.json",
+    "library.json",
+    "nestjs.json",
+    "nextjs.json"
+  ],
+  "exports": {
+    "./base.json": "./base.json",
+    "./library.json": "./library.json",
+    "./nestjs.json": "./nestjs.json",
+    "./nextjs.json": "./nextjs.json"
+  },
+  "scripts": {
+    "lint": "node scripts/validate-configs.mjs",
+    "test": "node scripts/validate-configs.mjs",
+    "typecheck": "node scripts/validate-configs.mjs"
+  }
+}

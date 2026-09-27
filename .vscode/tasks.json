@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "LearnMap: setup",
+      "type": "shell",
+      "command": "pnpm setup",
+      "problemMatcher": []
+    },
+    {
+      "label": "LearnMap: development",
+      "type": "shell",
+      "command": "pnpm dev",
+      "isBackground": true,
+      "problemMatcher": []
+    },
+    {
+      "label": "LearnMap: validate",
+      "type": "shell",
+      "command": "pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+      "problemMatcher": []
+    },
+    {
+      "label": "LearnMap: environment doctor",
+      "type": "shell",
+      "command": "pnpm doctor:services",
+      "problemMatcher": []
+    }
+  ]
+}

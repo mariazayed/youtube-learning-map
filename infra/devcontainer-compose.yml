@@ -1,0 +1,17 @@
+services:
+  dev:
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    command: sleep infinity
+    working_dir: /workspace
+    volumes:
+      - ../:/workspace:cached
+    environment:
+      DATABASE_URL: postgresql://app_user:local_password@postgres:5432/youtube_learning?schema=public
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy

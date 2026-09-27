@@ -1,0 +1,3 @@
+{
+  "extends": "@learnmap/typescript-config/base.json"
+}

@@ -1,0 +1,81 @@
+groups:
+  - name: learnmap-availability
+    rules:
+      - alert: LearnMapApiHealthDown
+        expr: probe_success{job="learnmap-health"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: api
+        annotations:
+          summary: LearnMap health endpoint is unavailable
+          description: The public /health readiness probe has failed for two minutes.
+          runbook: docs/OBSERVABILITY.md#api-or-worker-down
+
+      - alert: LearnMapWorkerDown
+        expr: absent(learnmap_worker_up) or learnmap_worker_up == 0 or (time() - learnmap_worker_heartbeat_timestamp_seconds > 60)
+        for: 2m
+        labels:
+          severity: critical
+          service: worker
+        annotations:
+          summary: No healthy LearnMap worker is reporting
+          description: The worker metric or Redis heartbeat is stale.
+          runbook: docs/OBSERVABILITY.md#api-or-worker-down
+
+  - name: learnmap-analysis-pipeline
+    rules:
+      - alert: LearnMapQueueBacklog
+        expr: learnmap_queue_jobs{state="waiting"} > 25
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: LearnMap analysis queue is backed up
+          description: More than 25 analyses have waited for at least ten minutes.
+          runbook: docs/OBSERVABILITY.md#queue-backlog
+
+      - alert: LearnMapQueueGrowing
+        expr: deriv(learnmap_queue_jobs{state="waiting"}[15m]) > 0 and learnmap_queue_jobs{state="waiting"} > 10
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: LearnMap queue depth is continuously growing
+          description: Intake is exceeding worker capacity.
+          runbook: docs/OBSERVABILITY.md#queue-backlog
+
+      - alert: LearnMapLowCompletionRate
+        expr: sum(rate(learnmap_analysis_outcomes_total{status="completed"}[30m])) / clamp_min(sum(rate(learnmap_analysis_outcomes_total{status=~"completed|failed"}[30m])), 0.000001) < 0.90 and sum(increase(learnmap_analysis_outcomes_total{status=~"completed|failed"}[30m])) >= 10
+        for: 10m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: LearnMap completion rate is below 90 percent
+          description: Terminal analysis outcomes have remained below the target completion rate.
+          runbook: docs/OBSERVABILITY.md#provider-or-validation-failures
+
+      - alert: LearnMapProviderErrors
+        expr: sum(increase(learnmap_ai_provider_errors_total[10m])) >= 5
+        for: 5m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: AI provider errors are elevated
+          description: Five or more provider failures occurred in ten minutes.
+          runbook: docs/OBSERVABILITY.md#provider-or-validation-failures
+
+      - alert: LearnMapValidationFailures
+        expr: increase(learnmap_ai_validation_failures_total[15m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          service: worker
+        annotations:
+          summary: AI output failed application validation
+          description: At least one provider response violated the shared schema or map rules.
+          runbook: docs/OBSERVABILITY.md#provider-or-validation-failures

@@ -1,0 +1,32 @@
+{
+  "name": "LearnMap Development",
+  "dockerComposeFile": [
+    "../infra/docker-compose.yml",
+    "../infra/devcontainer-compose.yml"
+  ],
+  "service": "dev",
+  "workspaceFolder": "/workspace",
+  "shutdownAction": "stopCompose",
+  "remoteUser": "node",
+  "postCreateCommand": "pnpm install --frozen-lockfile && pnpm db:generate",
+  "forwardPorts": [3000, 4000],
+  "portsAttributes": {
+    "3000": { "label": "LearnMap web" },
+    "4000": { "label": "LearnMap API" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Prisma.prisma",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "eslint.workingDirectories": ["apps/web", "apps/api", "apps/worker"]
+      }
+    }
+  }
+}

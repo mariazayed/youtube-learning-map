@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "promptVersion": 3,
+  "schemaVersion": 3,
+  "shortMaximumSeconds": 1200,
+  "maximumSeconds": 5400,
+  "videos": [
+    {
+      "id": "en-short-01",
+      "youtubeVideoId": "aircAruvnKk",
+      "youtubeUrl": "https://www.youtube.com/watch?v=aircAruvnKk",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "short",
+      "title": "But what is a neural network?",
+      "topic": "machine learning",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-short-02",
+      "youtubeVideoId": "WUvTyaaNkzM",
+      "youtubeUrl": "https://www.youtube.com/watch?v=WUvTyaaNkzM",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "short",
+      "title": "The essence of calculus",
+      "topic": "mathematics",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-short-03",
+      "youtubeVideoId": "0RRVV4Diomg",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0RRVV4Diomg",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "short",
+      "title": "Introduction to psychology",
+      "topic": "psychology",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-short-04",
+      "youtubeVideoId": "yWO-cvGETRQ",
+      "youtubeUrl": "https://www.youtube.com/watch?v=yWO-cvGETRQ",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "short",
+      "title": "How does the stock market work?",
+      "topic": "finance",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-short-05",
+      "youtubeVideoId": "QOCaacO8wus",
+      "youtubeUrl": "https://www.youtube.com/watch?v=QOCaacO8wus",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "short",
+      "title": "The agricultural revolution",
+      "topic": "history",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-long-01",
+      "youtubeVideoId": "kqtD5dpn9C8",
+      "youtubeUrl": "https://www.youtube.com/watch?v=kqtD5dpn9C8",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "long",
+      "title": "Python for beginners",
+      "topic": "programming",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-long-02",
+      "youtubeVideoId": "vStJoetOxJg",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vStJoetOxJg",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "long",
+      "title": "Machine learning specialization lesson",
+      "topic": "machine learning",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-long-03",
+      "youtubeVideoId": "Unzc731iCUY",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Unzc731iCUY",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "long",
+      "title": "Introduction to algorithms",
+      "topic": "computer science",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-long-04",
+      "youtubeVideoId": "UzxYlbK2c7E",
+      "youtubeUrl": "https://www.youtube.com/watch?v=UzxYlbK2c7E",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "long",
+      "title": "Machine learning lecture",
+      "topic": "computer science",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "en-long-05",
+      "youtubeVideoId": "GZvSYJDk-us",
+      "youtubeUrl": "https://www.youtube.com/watch?v=GZvSYJDk-us",
+      "sourceLanguage": "en",
+      "outputLanguage": "en",
+      "durationClass": "long",
+      "title": "Algorithms lecture",
+      "topic": "algorithms",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-short-01",
+      "youtubeVideoId": "ErrYTi9ibx4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ErrYTi9ibx4",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "short",
+      "title": "شرح UML Class Diagram بالعربي",
+      "topic": "هندسة البرمجيات",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-short-02",
+      "youtubeVideoId": "Rb3XBNWDQDM",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Rb3XBNWDQDM",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "short",
+      "title": "شرح Forest Plot بالعربي",
+      "topic": "البحث العلمي",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-short-03",
+      "youtubeVideoId": "O63nZ-5uvzg",
+      "youtubeUrl": "https://www.youtube.com/watch?v=O63nZ-5uvzg",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "short",
+      "title": "شرح تضاعف الحمض النووي",
+      "topic": "الأحياء",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-short-04",
+      "youtubeVideoId": "0nrjHslIvT4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=0nrjHslIvT4",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "short",
+      "title": "شرح استخدام Jupyter Notebook",
+      "topic": "البرمجة",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-short-05",
+      "youtubeVideoId": "vsElpi4OZWc",
+      "youtubeUrl": "https://www.youtube.com/watch?v=vsElpi4OZWc",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "short",
+      "title": "شرح Transformer Architecture بالعربي",
+      "topic": "الذكاء الاصطناعي",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-long-01",
+      "youtubeVideoId": "uPs7bKukgFw",
+      "youtubeUrl": "https://www.youtube.com/watch?v=uPs7bKukgFw",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "long",
+      "title": "تطبيقات تعليمية للمعلم",
+      "topic": "تقنيات التعليم",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-long-02",
+      "youtubeVideoId": "Ipj7H_vCi6Q",
+      "youtubeUrl": "https://www.youtube.com/watch?v=Ipj7H_vCi6Q",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "long",
+      "title": "شرح Designing Data-Intensive Applications",
+      "topic": "هندسة البرمجيات",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-long-03",
+      "youtubeVideoId": "L_ynA1b8lk4",
+      "youtubeUrl": "https://www.youtube.com/watch?v=L_ynA1b8lk4",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "long",
+      "title": "مقدمة في شبكات CCNA",
+      "topic": "الشبكات",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-long-04",
+      "youtubeVideoId": "iMGE2D6L77I",
+      "youtubeUrl": "https://www.youtube.com/watch?v=iMGE2D6L77I",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "long",
+      "title": "شرح EtherChannel",
+      "topic": "الشبكات",
+      "checkedAt": "2026-09-05"
+    },
+    {
+      "id": "ar-long-05",
+      "youtubeVideoId": "ggumOHgX598",
+      "youtubeUrl": "https://www.youtube.com/watch?v=ggumOHgX598",
+      "sourceLanguage": "ar",
+      "outputLanguage": "ar",
+      "durationClass": "long",
+      "title": "شرح Jenkins Pipeline",
+      "topic": "DevOps",
+      "checkedAt": "2026-09-05"
+    }
+  ]
+}

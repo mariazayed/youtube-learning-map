@@ -1,0 +1,22 @@
+{
+  "name": "@learnmap/eslint-config",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./node": "./node.mjs",
+    "./next": "./next.mjs"
+  },
+  "scripts": {
+    "lint": "node scripts/validate-configs.mjs",
+    "test": "node scripts/validate-configs.mjs",
+    "typecheck": "node scripts/validate-configs.mjs"
+  },
+  "dependencies": {
+    "@eslint/js": "9.34.0",
+    "typescript-eslint": "^8.41.0"
+  },
+  "peerDependencies": {
+    "eslint": "9.34.0"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "youtube-learning-map",
+  "version": "0.16.0",
+  "private": true,
+  "description": "Bilingual YouTube learning summaries and interactive mind maps",
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "test:integration": "pnpm --filter @learnmap/api test:integration",
+    "test:e2e": "pnpm --filter @learnmap/web test:e2e",
+    "test:e2e:install": "pnpm --filter @learnmap/web exec playwright install --with-deps chromium",
+    "eval:ai": "pnpm --filter @learnmap/evaluation eval",
+    "typecheck": "turbo typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "validate": "pnpm workspace:check && pnpm infra:check && pnpm lint && pnpm typecheck && pnpm test && pnpm test:integration && pnpm build",
+    "workspace:check": "node scripts/check-workspace.mjs",
+    "setup": "node scripts/bootstrap.mjs",
+    "doctor": "node scripts/doctor.mjs",
+    "doctor:services": "node scripts/doctor.mjs --services",
+    "env:check": "node scripts/check-env.mjs",
+    "db:generate": "pnpm --filter @learnmap/database db:generate",
+    "db:migrate": "pnpm --filter @learnmap/database db:migrate",
+    "db:studio": "pnpm --filter @learnmap/database db:studio",
+    "infra:check": "node scripts/check-infra.mjs",
+    "infra:config": "node scripts/infra.mjs config",
+    "infra:up": "node scripts/infra.mjs up",
+    "infra:observability": "docker compose -f infra/docker-compose.yml --profile observability up -d",
+    "infra:status": "node scripts/infra.mjs status",
+    "infra:logs": "node scripts/infra.mjs logs",
+    "infra:down": "node scripts/infra.mjs down",
+    "infra:reset": "node scripts/infra.mjs reset"
+  },
+  "devDependencies": {
+    "eslint": "9.34.0",
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "^5.9.2",
+    "yaml": "^2.8.1"
+  }
+}
